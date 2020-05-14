@@ -18,9 +18,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="nav navbar-nav">
-                    <a class="nav-item nav-link active" href="#">AWS</a>
-                    <a class="nav-item nav-link active" href="#">Azure</a>
-                    <a class="nav-item nav-link active" href="#">GCP</a>
+                    <a class="nav-item nav-link active" href="/aws">AWS</a>
+                    <a class="nav-item nav-link active" href="/azure">Azure</a>
+                    <a class="nav-item nav-link active" href="/gcp">GCP</a>
                     
                 </div>
                 <ul class="nav navbar-nav ml-auto">
@@ -30,6 +30,41 @@
                 </ul>
             </div>
         </nav>
+
+        <table class="table table-bordered table-hover table-condensed">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Cloud provider</th>
+                <th scope="col">Name</th>
+                <th scope="col">API Name</th>
+                <th scope="col">Memory</th>
+                <th scope="col">vCPUs</th>
+                <th scope="col">GPUs</th>
+                <th scope="col">GPU model</th>
+                <th scope="col">Storage</th>
+                <th scope="col">Network performance</th>
+                <th scope="col">Linux on demand cost</th>
+                <th scope="col">Windows on demand cost</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for server in servers %}
+                    <tr>
+                        <td>{{ server.cloud_provider }}</td>
+                        <td>{{ server.name }}</td>
+                        <td>{{ server.api_name }}</td>
+                        <td>{{ server.memory }}</td>
+                        <td>{{ server.vCPUs }}</td>
+                        <td>{{ server.GPUs }}</td>
+                        <td>{{ server.GPU_model }}</td>
+                        <td>{{ server.storage }}</td>
+                        <td>{{ server.network_performance }}</td>
+                        <td>{{ server.linux_on_demand_cost }}</td>
+                        <td>{{ server.windows_on_demand_cost }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
         
 
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
