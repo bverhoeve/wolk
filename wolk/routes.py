@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, url_for
 from wolk import app
 
 servers = [
@@ -37,7 +37,8 @@ def index():
 
 @app.route('/aws')
 def aws():
-    return render_template('index.html', servers=servers)
+    page_logo = url_for('static', filename='assets/aws_logo.svg')
+    return render_template('aws.html', page_logo=page_logo)
 
 @app.route('/azure')
 def azure():

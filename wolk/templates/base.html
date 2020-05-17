@@ -42,6 +42,9 @@
                     
                 </div>
                 <ul class="nav navbar-nav ml-auto">
+                    {% if page_logo %}
+                        <img src="{{ page_logo }}" class="rounded-lg" width="75"/>
+                    {% endif %}
                     <span class="pull-right">
                         <iframe src="https://ghbtns.com/github-btn.html?user=bverhoeve&repo=wolk&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
                     </span>
