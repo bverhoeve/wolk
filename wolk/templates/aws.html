@@ -1,38 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <table class="table table-bordered table-hover table-condensed">
-        <thead class="thead-light">
-            <tr>
-            <th scope="col">Cloud provider</th>
-            <th scope="col">Name</th>
-            <th scope="col">API Name</th>
-            <th scope="col">Memory</th>
-            <th scope="col">vCPUs</th>
-            <th scope="col">GPUs</th>
-            <th scope="col">GPU model</th>
-            <th scope="col">Storage</th>
-            <th scope="col">Network performance</th>
-            <th scope="col">Linux on demand cost</th>
-            <th scope="col">Windows on demand cost</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for server in servers %}
-                <tr>
-                    <td>{{ server.cloud_provider }}</td>
-                    <td>{{ server.name }}</td>
-                    <td>{{ server.api_name }}</td>
-                    <td>{{ server.memory }}</td>
-                    <td>{{ server.vCPUs }}</td>
-                    <td>{{ server.GPUs }}</td>
-                    <td>{{ server.GPU_model }}</td>
-                    <td>{{ server.storage }}</td>
-                    <td>{{ server.network_performance }}</td>
-                    <td>{{ server.linux_on_demand_cost }}</td>
-                    <td>{{ server.windows_on_demand_cost }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+    <p> hello is it me you're looking for?</p>
+    <img src="{{url_for('static', filename='assets/aws_logo.svg')}}"/>
+
 {% endblock %}
