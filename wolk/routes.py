@@ -1,10 +1,7 @@
 from flask import render_template
 from wolk import app
 
-@app.route('/')
-@app.route('/index')
-def index():
-    servers = [
+servers = [
         {
             'cloud_provider': 'AWS',
             'name': 'T2 micro',
@@ -32,11 +29,15 @@ def index():
             'windows_on_demand_cost': '$20 hourly',
         }
     ]
+
+@app.route('/')
+@app.route('/index')
+def index():
     return render_template('index.html', servers=servers)
 
 @app.route('/aws')
 def aws():
-    return 'AWS page'
+    return render_template('index.html', servers=servers)
 
 @app.route('/azure')
 def azure():
