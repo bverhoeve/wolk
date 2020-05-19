@@ -1,6 +1,10 @@
 from flask import render_template, url_for
 from wolk import app
 
+AWS_LOGO = 'assets/aws_logo.svg'
+AZURE_LOGO = 'assets/microsoft_azure_logo.svg'
+GCP_LOGO = 'assets/google_cloud_logo.svg'
+
 servers = [
         {
             'cloud_provider': 'AWS',
@@ -37,13 +41,15 @@ def index():
 
 @app.route('/aws')
 def aws():
-    page_logo = url_for('static', filename='assets/aws_logo.svg')
+    page_logo = url_for('static', filename=AWS_LOGO)
     return render_template('aws.html', page_logo=page_logo)
 
 @app.route('/azure')
 def azure():
-    return 'Microsoft Azure page'
+    page_logo = url_for('static', filename=AZURE_LOGO)
+    return render_template('aws.html', page_logo=page_logo)
 
 @app.route('/gcp')
 def gcp():
-    return 'GCP'
+    page_logo = url_for('static', filename=GCP_LOGO)
+    return render_template('google_cloud.html', page_logo=page_logo)
