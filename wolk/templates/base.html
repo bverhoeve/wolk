@@ -29,26 +29,26 @@
     </head>
     <body>
         <!-- Nav bar -->
-        <nav class="navbar navbar-dark bg-dark bg-primary navbar-expand-sm">
-            <a class="navbar-brand" href="/">Wolk</a>
+        <nav class="navbar navbar-dark bg-light navbar-expand-sm fixed-top">
+            <a class="navbar-brand text-dark" href="/">Wolk</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="nav navbar-nav">
-                    <a class="nav-item nav-link active" href="/aws">AWS</a>
-                    <a class="nav-item nav-link active" href="/azure">Azure</a>
-                    <a class="nav-item nav-link active" href="/gcp">GCP</a>
+                    <a class="nav-item nav-link active text-dark" href="/aws">AWS</a>
+                    <a class="nav-item nav-link active text-dark" href="/azure">Azure</a>
+                    <a class="nav-item nav-link active text-dark" href="/gcp">GCP</a>
                     
                 </div>
-                <ul class="nav navbar-nav ml-auto">
+                <div class="nav navbar-nav ml-auto">
                     {% if page_logo %}
-                        <img src="{{ page_logo }}" class="rounded-lg" width="75"/>
+                        <img src="{{ page_logo }}" class="rounded-lg mr-2" width="75"/>
                     {% endif %}
-                    <span class="pull-right">
+                    <span class="pull-right ml-2">
                         <iframe src="https://ghbtns.com/github-btn.html?user=bverhoeve&repo=wolk&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
                     </span>
-                </ul>
+                </div>
             </div>
         </nav>
 
