@@ -1,6 +1,11 @@
 # Ignore macOS files
 .DS_Store
+
+# Ignore vscode settings
 .vscode
+
+# Don't push data files for now
+data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
