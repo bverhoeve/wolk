@@ -1,5 +1,8 @@
 from flask import render_template, url_for
+from typing import Dict
+
 from wolk import app
+from .data import get_aws_data
 
 AWS_LOGO = 'assets/aws_logo.svg'
 AZURE_LOGO = 'assets/microsoft_azure_logo.svg'
@@ -41,8 +44,10 @@ def index():
 
 @app.route('/aws')
 def aws():
+    aws_data: Dict = get_aws_data()
     page_logo = url_for('static', filename=AWS_LOGO)
-    return render_template('aws.html', page_logo=page_logo)
+
+    return render_template('aws.html', page_logo=page_logo, data=aws_data)
 
 @app.route('/azure')
 def azure():

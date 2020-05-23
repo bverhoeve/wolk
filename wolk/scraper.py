@@ -31,7 +31,7 @@ def scrape_aws_data() -> Dict:
         raise AWSDataScrapeException(f'Error while scraping AWS data from EC2instances.info')
 
 def store_aws_data(aws_data: Dict):
-
+    
     with open(AWS_DATA_LOCATION, 'w') as fp:
         json.dump(aws_data, fp)
 
