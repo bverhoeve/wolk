@@ -3,7 +3,7 @@ import json
 
 from typing import Dict
 
-from .scraper import scrape_aws_data
+from .scraper import scrape_aws_data, store_aws_data
 
 
 DATA_DIR = 'data'
@@ -19,14 +19,19 @@ def aws_data_exists() -> bool:
 def get_aws_data() -> Dict:
     
     # if the aws data exists, read it in from the file
-    #if aws_data_exists:
+    if aws_data_exists:
      
-     #   with open(os.path.join('.', DATA_DIR, AWS_FILE), 'r') as fp:
-      #      aws_data: Dict = json.load(fp)
-       #     return aws_data
+        with open(os.path.join('.', DATA_DIR, AWS_FILE), 'r') as fp:
+            aws_data: Dict = json.load(fp)
+            return aws_data
     
     # if the data does not exists, a fresh scrape is required
-    return scrape_aws_data()
+    aws_data: Dict = scrape_aws_data()
+
+    # store data 
+    store_aws_data(aws_data)
+
+    return aws_data
 
 
 
