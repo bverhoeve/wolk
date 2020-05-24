@@ -1,3 +1,6 @@
+# Ignore all possible credentials
+*credentials*.csv
+
 # Ignore macOS files
 .DS_Store
 
