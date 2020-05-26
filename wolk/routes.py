@@ -3,6 +3,7 @@ from typing import Dict
 
 from wolk import app
 from .scraper import scrape
+from .data import get_aws_data
 
 AWS_LOGO = 'assets/aws_logo.svg'
 AZURE_LOGO = 'assets/microsoft_azure_logo.svg'
@@ -44,10 +45,10 @@ def index():
 
 @app.route('/aws')
 def aws():
-    scrape()
+    aws_data = get_aws_data()
     page_logo = url_for('static', filename=AWS_LOGO)
 
-    return render_template('aws.html', page_logo=page_logo)
+    return render_template('aws.html', page_logo=page_logo, data=aws_data)
 
 @app.route('/azure')
 def azure():

@@ -8,17 +8,17 @@ from pathlib import Path
 import boto3
 from botocore.exceptions import ClientError
 
-DATA_DIR = 'data'
+from .constants import (
+    DATA_DIR,
+    S3_BUCKET,
+    AWS_DIR,
+    AWS_DEFAULT_DATA_LOC,
+    AWS_EC2_FILE,
+    AWS_RDS_FILE
+)
 
-S3_BUCKET = 'wolk.data'
-
-
-AWS_DIR = 'aws'
-AWS_DEFAULT_DATA_LOC = os.path.join(DATA_DIR, AWS_DIR)
 AWS_EC2_URL = 'http://www.ec2instances.info/instances.json'
 AWS_RDS_URL = 'http://www.ec2instances.info/rds/instances.json'
-AWS_EC2_FILE = 'ec2_instances.json'
-AWS_RDS_FILE = 'rds_instances.json'
 
 def scrape_aws(data_location: str = AWS_DEFAULT_DATA_LOC) -> None:
 
