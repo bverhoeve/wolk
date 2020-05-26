@@ -86,7 +86,7 @@ def upload_data_to_s3(file_name: str, bucket: str, object_name=None):
     logging.info(f'Uploaded scraped data to S3: s3://{S3_BUCKET}{object_name}')
     return True
 
-def upload_scraped():
+def upload_data():
     """Upload scraped data to S3
     """
 
