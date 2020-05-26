@@ -8,6 +8,7 @@ docutils==0.15.2
 Flask==1.1.2
 gunicorn==20.0.4
 idna==2.9
+invoke==1.4.1
 isort==4.3.21
 itsdangerous==1.1.0
 Jinja2==2.11.2
