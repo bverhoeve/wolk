@@ -28,34 +28,9 @@
         <title>Wolk</title>
     </head>
     <body>
-        <!-- Nav bar -->
-        <nav class="navbar navbar-dark bg-light navbar-expand-sm fixed-top static-top">
-            <a class="navbar-brand text-dark" href="/">Wolk</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="nav navbar-nav">
-                    <a class="nav-item nav-link active text-dark" href="/aws">AWS</a>
-                    <a class="nav-item nav-link active text-dark" href="/azure">Azure</a>
-                    <a class="nav-item nav-link active text-dark" href="/gcp">GCP</a>
-                    
-                </div>
-                <div class="nav navbar-nav ml-auto">
-                    {% if page_logo %}
-                        <img src="{{ page_logo }}" class="rounded-lg mr-2" height="40px"/>
-                    {% endif %}
-                    <span class="pull-right ml-2">
-                        <iframe src="https://ghbtns.com/github-btn.html?user=bverhoeve&repo=wolk&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
-                    </span>
-                </div>
-            </div>
-        </nav>
+        {% block page %}{% endblock %}
 
-        <!-- Page contents -->
-        {% block content %}{% endblock %}
-
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </body>

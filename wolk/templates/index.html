@@ -1,38 +1,54 @@
-{% extends "base.html" %}
-
+{% extends "nav.html" %}
 {% block content %}
-    <table class="table table-bordered table-hover table-condensed">
-        <thead class="thead-light">
-            <tr>
-            <th scope="col">Cloud provider</th>
-            <th scope="col">Name</th>
-            <th scope="col">API Name</th>
-            <th scope="col">Memory</th>
-            <th scope="col">vCPUs</th>
-            <th scope="col">GPUs</th>
-            <th scope="col">GPU model</th>
-            <th scope="col">Storage</th>
-            <th scope="col">Network performance</th>
-            <th scope="col">Linux on demand cost</th>
-            <th scope="col">Windows on demand cost</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for server in servers %}
-                <tr>
-                    <td>{{ server.cloud_provider }}</td>
-                    <td>{{ server.name }}</td>
-                    <td>{{ server.api_name }}</td>
-                    <td>{{ server.memory }}</td>
-                    <td>{{ server.vCPUs }}</td>
-                    <td>{{ server.GPUs }}</td>
-                    <td>{{ server.GPU_model }}</td>
-                    <td>{{ server.storage }}</td>
-                    <td>{{ server.network_performance }}</td>
-                    <td>{{ server.linux_on_demand_cost }}</td>
-                    <td>{{ server.windows_on_demand_cost }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="jumbotron jumbotron fluid">
+    <h1 class="display-4">Wolk</h1>
+    <p class="lead">Easy comparision of virtual machines in the cloud!</p>
+    <hr class="my-4">
+    <p>
+        Comparing virtual machines offered by a cloud provider is quite frustrating. Using their own 
+        <a href="https://aws.amazon.com/ec2/instance-types/">VM type descriptions</a> or 
+        <a href="https://ec2instances.info/?min_memory=1000&region=us-east-2">pricing</a> pages and comparing
+        them against the <a href="https://cloud.google.com/compute/vm-instance-pricing">pages of other cloud providers</a>
+        is a boring, time consuming task that doesn't make anyone happy.
+        <br />
+        <br />
+        Wolk helps you to easily compare VMs in the cloud by providing you:
+        <ul>
+            <li>
+                Accurate, up to date data on VMs offered by AWS, Microsoft Azure and Google Cloud Platform
+            </li>
+            <li>
+                A spreadsheet-like visualisation of the data
+            </li>
+            <li>
+                Easy to use filters to focus on what matters most for you
+            </li>
+        </ul>
+    </p>
+    <a class="btn btn-primary btn-lg" href="https://github.com/bverhoeve/wolk" role="button">Learn more</a>    
+</div>
+<div class="col-xs-1" align="center">
+    <h2>The cloud providers</h2>
+</div>
+
+<div class="container" align="center" id="providers">
+    <div class="row">
+        <div class="col">
+            <a href="/aws">
+                <img src="{{ url_for('static', filename='assets/aws_logo.svg') }}" height="50px">
+            </a>
+        </div>
+        <div class="col">
+            <a href="/azure">
+                <img src="{{ url_for('static', filename='assets/microsoft_azure_logo.svg') }}" height="50px">
+            </a>
+        </div>
+        <div class="col">
+            <a href="/gcp">
+                <img src="{{ url_for('static', filename='assets/google_cloud_logo.svg') }}" height="50px">
+            </a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

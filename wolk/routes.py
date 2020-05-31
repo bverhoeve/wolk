@@ -53,7 +53,7 @@ def aws():
 @app.route('/azure')
 def azure():
     page_logo = url_for('static', filename=AZURE_LOGO)
-    return render_template('aws.html', page_logo=page_logo)
+    return render_template('azure.html', page_logo=page_logo)
 
 @app.route('/gcp')
 def gcp():

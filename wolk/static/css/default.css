@@ -46,3 +46,6 @@ th {
     white-space: nowrap;
 }
 
+#providers {
+    padding: 15px;
+}
