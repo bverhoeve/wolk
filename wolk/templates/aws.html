@@ -9,11 +9,11 @@
             <th scope="col">Compute Units (ECU)</th>
             <th scope="col">vCPUs</th>
             <th scope="col">GPUs</th>
-            <th scope="col">GPU model</th>
+            <th scope="col">GPU Model</th>
             <th scope="col">GPU Memory</th>
             <th scope="col">CUDA Compute Capability</th>
             <th scope="col">FPGAs</th>
-            <th scope="col">ECU per vCPU</th>
+            <!-- <th scope="col">ECU per vCPU</th> -->
             <th scope="col">Physical Processor</th>
             <th scope="col">Clock Speed (GHz)</th>
             <th scope="col">Intel AVX</th>
@@ -62,6 +62,39 @@
             </tr>
         </thead>
         <tbody>
+            {% for instance in instances %}
+            <tr>
+                <td>{{ instance.pretty_name }}</td>
+                <td>{{ instance.instance_type }}</td>
+                <td>{{ instance.ECU }}</td>
+                <td>{{ instance.vCPU }}</td>
+                <td>{{ instance.GPU }}</td>
+                <td>{{ instance.GPU_model }}</td>
+                <td>{{ instance.GPU_memory }}</td>
+                <td>{{ instance.compute_capability }}</td>
+                <td>{{ instance.FPGA }}</td>
+                <td>{{ instance.physical_processor}}</td>
+                <td>{{ instance.clock_speed_ghz }}</td>
+                <td>{{ instance.intel_avx }}</td>
+                <td>{{ instance.intel_avx2 }}</td>
+                <td>{{ instance.intel_avx512 }}</td>
+                <td>{{ instance.intel_turbo }}</td>
+                {% if instance.storage %}
+                    <td>
+                        {{ instance.storage.devices * instance.storage.size}} GiB 
+                        {% if instance.storage.devices > 1 %}
+                            ({{instance.storage.devices}} * {{ instance.storage.size }} GiB)
+                        {% endif %}
+                        {% if instance.storage.nvme_ssd %}
+                            NVMe
+                        {% endif %}
+                        SSD
+                    </td>
+                {% else %}
+                    <td>EBS Only</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
 
         </tbody>
     </table>

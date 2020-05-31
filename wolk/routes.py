@@ -45,10 +45,10 @@ def index():
 
 @app.route('/aws')
 def aws():
-    aws_data = get_aws_data()
+    instances = get_aws_data('ec2')
     page_logo = url_for('static', filename=AWS_LOGO)
 
-    return render_template('aws.html', page_logo=page_logo, data=aws_data)
+    return render_template('aws.html', page_logo=page_logo, instances=instances)
 
 @app.route('/azure')
 def azure():
