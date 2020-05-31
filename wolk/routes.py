@@ -47,8 +47,10 @@ def index():
 def aws():
     instances = get_aws_data('ec2')
     page_logo = url_for('static', filename=AWS_LOGO)
+    region = 'us-east-1'
+    reserved_type = 'yrTerm1Convertible.allUpfront'
 
-    return render_template('aws.html', page_logo=page_logo, instances=instances)
+    return render_template('aws.html', page_logo=page_logo, instances=instances, region=region, reserved_type=reserved_type)
 
 @app.route('/azure')
 def azure():

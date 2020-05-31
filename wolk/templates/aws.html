@@ -79,6 +79,7 @@
                 <td>{{ instance.intel_avx2 }}</td>
                 <td>{{ instance.intel_avx512 }}</td>
                 <td>{{ instance.intel_turbo }}</td>
+                <!-- Storage size-->
                 {% if instance.storage %}
                     <td>
                         {{ instance.storage.devices * instance.storage.size}} GiB 
@@ -93,6 +94,138 @@
                 {% else %}
                     <td>EBS Only</td>
                 {% endif %}
+
+                <!-- Instance storage already warmed up-->
+                {% if instance.storage%}
+                    <td>
+                        {% if instance.storage.storage_needs_initialization %}
+                        No
+                        {% else %}
+                        Yes
+                        {% endif %}
+                    </td>
+                {% else %}
+                    <td>
+                        N.A.
+                    </td>
+                {% endif %}
+                
+                <!-- Instance storage trim support -->
+                {% if instance.storage%}
+                    <td>
+                        {% if instance.storage.trim_support %}
+                        Yes
+                        {% else %}
+                        No
+                        {% endif %}
+                    </td>
+                {% else %}
+                    <td>
+                        N.A.
+                    </td>
+                {% endif %}
+
+                <!-- Instance processor architecture -->
+                <td>
+                    {% for arch in instance.arch %}
+                        {{ arch }} 
+                    {% endfor %}
+                </td>
+                <td>{{ instance.network_performance }}</td>
+                <td>{{ instance.ebs_max_bandwidth }} Mbps</td>
+                <td>{{ instance.ebs_throughput }} Mbps</td>
+                <td>{{ instance.ebs_iops }} IOPS</td>
+
+                <!-- EBS as NVMe -->
+                {% if instance.ebs_as_nvme%}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+                <td>{{ instance.vpc.ips_per_eni }}</td>
+                <td>{{ instance.vpc.max_enis }}</td>
+
+                <!-- Enhanced networking -->
+                {% if instance.enhanced_networking %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+
+                <!-- VPC only -->
+                {% if instance.vpc_only %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+
+                <!-- Ipv6 support -->
+                {% if instance.ipv6_support %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+                
+                <!-- Placement group support -->
+                {% if instance.placement_group_support %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+
+                {% if instance.linux_virtualization_types | length > 0 %}
+                    <td>
+                    
+                        {% for virtualization_type in instance.linux_virtualization_types %}
+                            {{virtualization_type}} 
+                        {% endfor %}
+                    </td>
+                {% else %}
+                    <td>
+                        Unknown
+                    </td>
+                {% endif %}
+
+                <!-- EMR -->
+                {% if instance.emr %}
+                    <td>
+                        Yes
+                    </td>
+                {% else %}
+                    <td>
+                        No
+                    </td>
+                {% endif %}
+
+                <!-- Pricing -->
+                {% if region in instance.pricing %}
+                    <td>$ {{ instance.pricing[region]['linux']['ondemand']}}</td>
+                    {% if instance.pricing[region]['linux']['reserved'] %}
+                        <td>$ {{ instance.pricing[region]['linux']['reserved'][reserved_type] }}</td>
+                    {% else %}
+                        <td> Unavailable </td>
+                    {% endif %}
+
+                    {% if instance.pricing[region]['rhel'] %}
+                        <td>$ {{ instance.pricing[region]['rhel']['ondemand']}}</td>
+                        {% if instance.pricing[region]['rhel']['reserved'] %}
+                            <td>$ {{ instance.pricing[region]['rhel']['reserved'][reserved_type] }}</td>
+                        {% else %}
+                            <td> Unavailable </td>
+                        {% endif %}
+                    {% else %}
+                        <td> Unavailable </td>
+                        <td> Unavailable </td>
+                    {% endif %}
+
+
+                {% else %}
+                    {% for i in range(20) %}
+                        <td> Unavailable</td>
+                    {% endfor %}
+                {% endif %}
+
+
             </tr>
             {% endfor %}
 
