@@ -197,19 +197,12 @@
                     </td>
                 {% endif %}
 
-                <!-- Pricing -->
-                {% if region in instance.pricing %}
-                    <td>$ {{ instance.pricing[region]['linux']['ondemand']}}</td>
-                    {% if instance.pricing[region]['linux']['reserved'] %}
-                        <td>$ {{ instance.pricing[region]['linux']['reserved'][reserved_type] }}</td>
-                    {% else %}
-                        <td> Unavailable </td>
-                    {% endif %}
-
-                    {% if instance.pricing[region]['rhel'] %}
-                        <td>$ {{ instance.pricing[region]['rhel']['ondemand']}}</td>
-                        {% if instance.pricing[region]['rhel']['reserved'] %}
-                            <td>$ {{ instance.pricing[region]['rhel']['reserved'][reserved_type] }}</td>
+                <!-- Macro for displaying pricing information -->
+                {% macro pricing(instance, region, price_type, reserved_type) -%}
+                    {% if instance.pricing[region][price_type] %}
+                        <td>$ {{ instance.pricing[region][price_type]['ondemand']}}</td>
+                        {% if instance.pricing[region][price_type]['reserved'] %}
+                            <td>$ {{ instance.pricing[region][price_type]['reserved'][reserved_type] }}</td>
                         {% else %}
                             <td> Unavailable </td>
                         {% endif %}
@@ -217,15 +210,58 @@
                         <td> Unavailable </td>
                         <td> Unavailable </td>
                     {% endif %}
+                {%- endmacro %}
 
+                <!-- Pricing -->
+                {% if region in instance.pricing %}
+
+                    <!-- Standard linux -->
+                    {{ pricing(instance, region, 'linux', reserved_type) }}
+                    <!-- RHEL Linux -->
+                    {{ pricing(instance, region, 'rhel', reserved_type) }}
+                    <!-- SLES Linux -->
+                    {{ pricing(instance, region, 'sles', reserved_type) }}
+                    <!-- Windows -->
+                    {{ pricing(instance, region, 'mswin', reserved_type) }}
+                    <!-- Windows SQL Web -->
+                    {{ pricing(instance, region, 'mswinSQLWeb', reserved_type) }}
+                    <!-- Windows SQL Std -->
+                    {{ pricing(instance, region, 'mswinSQL', reserved_type) }}
+                    <!-- Window SQL Enterprise -->
+                    {{ pricing(instance, region, 'mswinSQLEnterprise', reserved_type) }}
+                    <!-- Linux SQL Web -->
+                    {{ pricing(instance, region, 'linuxSQLWeb', reserved_type) }}
+                    <!-- Linux SQL Std -->
+                    {{ pricing(instance, region, 'linuxSQL', reserved_type) }}
+                    <!-- Linux SQL Enterprise -->
+                    {{ pricing(instance, region, 'linuxSQLEnterprise', reserved_type) }}
+
+                    <!-- EBS Optimized surcharge -->
+                    {% if 'ebs' in instance.pricing[region] %}
+                        <td>$ {{ instance.pricing[region]['ebs'] }}</td>
+                    {% else %}
+                        <td>Unavailable</td>
+                    {% endif %}
+
+                    <!-- EMR surcharge -->
+                    {% if instance.emr %}
+                        <!-- Quality check is needed, since for some data the value is emrf apparently -->
+                        {% if 'emr' in instance.pricing[region] %}
+                            <td>$ {{instance.pricing[region]['emr']['emr'] }} </td>
+                        {% endif %}
+                        {% if 'emrf' in instance.pricing[region] %}
+                            <td>$ {{instance.pricing[region]['emrf']['emr'] }}</td>
+                        {% endif %}
+                    {% else %}
+                        <td> Unavailable </td>
+                    {% endif %}
 
                 {% else %}
-                    {% for i in range(20) %}
+                    {% for i in range(22) %}
                         <td> Unavailable</td>
                     {% endfor %}
                 {% endif %}
-
-
+                
             </tr>
             {% endfor %}
 
