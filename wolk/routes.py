@@ -1,9 +1,12 @@
-from flask import render_template, url_for
+import logging
+from flask import render_template, url_for, request
 from typing import Dict
 
 from wolk import app
 from .scraper import scrape
 from .data import get_aws_data
+from .arg_parser import parse_aws_region
+from .constants import AWSRegion
 
 AWS_LOGO = 'assets/aws_logo.svg'
 AZURE_LOGO = 'assets/microsoft_azure_logo.svg'
@@ -45,12 +48,22 @@ def index():
 
 @app.route('/aws')
 def aws():
+
+    # Parse region argument
+    region_arg: str = request.args.get('region', '')
+    logging.debug(f'Region is {region_arg}')
+
+    try:
+        region: AWSRegion = parse_aws_region(region_arg)
+    except ValueError:
+        # Default region
+        region: AWSRegion = AWSRegion.US_EAST_1
+    
     instances = get_aws_data('ec2')
     page_logo = url_for('static', filename=AWS_LOGO)
-    region = 'us-east-1'
     reserved_type = 'yrTerm1Convertible.allUpfront'
 
-    return render_template('aws.html', page_logo=page_logo, instances=instances, region=region, reserved_type=reserved_type)
+    return render_template('aws.html', page_logo=page_logo, instances=instances, region=region.value[0], reserved_type=reserved_type)
 
 @app.route('/azure')
 def azure():
