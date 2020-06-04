@@ -12,6 +12,7 @@ AWS_EC2_FILE = 'ec2_instances.json'
 AWS_RDS_FILE = 'rds_instances.json'
 
 AZURE_DIR = 'azure'
+AZURE_DEFAULT_DATA_LOC = os.path.join(DATA_DIR, AZURE_DIR)
 
 GCP_DIR = 'gcp'
 

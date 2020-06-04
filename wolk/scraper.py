@@ -14,11 +14,48 @@ from .constants import (
     AWS_DIR,
     AWS_DEFAULT_DATA_LOC,
     AWS_EC2_FILE,
-    AWS_RDS_FILE
+    AWS_RDS_FILE,
+    AZURE_DEFAULT_DATA_LOC
 )
 
 AWS_EC2_URL = 'http://www.ec2instances.info/instances.json'
 AWS_RDS_URL = 'http://www.ec2instances.info/rds/instances.json'
+
+AZURE_VM_MASTER_DATA_LINK = 'https://azure.microsoft.com/en-us/pricing/details/virtual-machines/'
+AZURE_VM_SUB_PAGES = [
+    'linux',
+    'red-hat',
+    'rhel-ha',
+    'rhel-sap-business',
+    'rhel-sap-hana',
+    'rhel-sap-hana-ha',
+    'sles-basic',
+    'sles-standard',
+    'sles-hpc-standard',
+    'sles-sap',
+    'ubuntu-advantage-essential',
+    'ubuntu-advantage-standard',
+    'ubuntu-advantage-advanced',
+    'ml-server-rhel',
+    'ml-server-ubuntu',
+    'sql-server-enterprise-linux',
+    'sql-server-standard-linux',
+    'sql-server-web-linux',
+    'sql-server-enterprise-redhat',
+    'sql-server-standard-redhat',
+    'sql-server-web-redhat',
+    'sql-server-enterprise-sles',
+    'sql-server-standard-sles',
+    'sql-server-web-sles',
+    'windows',
+    'biztalk-enterprise',
+    'biztalk-standard',
+    'ml-server-windows',
+    'sharepoint',
+    'sql-server-enterprise',
+    'sql-server-standard',
+    'sql-server-web'
+]
 
 def scrape_aws(data_location: str = AWS_DEFAULT_DATA_LOC) -> None:
 
@@ -55,6 +92,9 @@ def scrape_aws(data_location: str = AWS_DEFAULT_DATA_LOC) -> None:
         logging.info(f'Scrape successful, saved data to {os.path.join(data_location, AWS_RDS_FILE)}')
     else:
         logging.info(f'Error while scraping RDS data from {AWS_RDS_URL}')
+
+def scrape_azure_data(data_location: str = AZURE_DEFAULT_DATA_LOC) -> None:
+    pass
 
 def scrape(data_location: str = DATA_DIR):
 
